@@ -5,33 +5,30 @@
 #include <SD.h>
 
 File fd; 
-char filename[] = "TrueShoeData.txt";
+char filename[] = "TrueShoeData.txt"; //Name of GPS data file
 
-static const int RXPin = 9, TXPin = 10;
+static const int RXPin = 9, TXPin = 10; // Software Serial pins for GPS Module
 static const uint32_t GPSBaud = 9600;
 
-const int cardSelect = 7;
+const int cardSelect = 7;  // This is really the only important pin you need. CardDetect is meant for another pin that simply checks if the SD card is in. 
 const int cardDetect = 6;
-int count = 0;
+int count = 0; // variable for pedometer
 
-unsigned long starttime = millis();
+unsigned long starttime = millis(); 
 unsigned long endtime = starttime;
 unsigned long lastUpdateTime = 0;
 
-static char outstr [15];
-float desiredspeed;
+static char outstr [15]; //stores GPS speed float
+float desiredspeed; 
 float duration; 
 float runspeed;
 
-bool alreadyBegan = false;
+bool alreadyBegan = false; 
 
-TinyGPSPlus gps;
+TinyGPSPlus gps; //object to which GPS data sent to
 
-SoftwareSerial ss(RXPin, TXPin);
-SoftwareSerial ble(0, 1);
-
-boolean pulsing = true;
-boolean transmitting = true;
+SoftwareSerial ss(RXPin, TXPin); 
+SoftwareSerial ble(0, 1); //BLE module 
 
 String inString = "";
 
@@ -42,11 +39,8 @@ float gpslat = gps.location.lat();
 float gpslng = gps.location.lng();
 float gpsspeed = gps.speed.mph();
 
-float latit;
+float latit; //used in navigation
 float longit;
-
-
-
 
 void setup()
 {
@@ -55,18 +49,18 @@ void setup()
   ss.begin(GPSBaud);
 
   delay(7000);
-  Serial1.println("Rohan's GPS");
-  Serial1.println("Testing TinyGPS++ library v. "); 
+  Serial1.println("Rohan's Smart Shoe");
+  Serial1.println("Testing TinyGPS++ library v. "); //Credits to Tiny GPS++ library 
   Serial1.println(TinyGPSPlus::libraryVersion());
   Serial1.println("Please enter a command");
   Serial1.println();
   
   
-  //initializeCard();
+  //initializeCard(); For use with larger micro-controllers (enables SD card)
   //runcard();
 
   pinMode(cardSelect, INPUT);
-  pinMode(6, OUTPUT);
+  pinMode(6, OUTPUT); //motor disks
   pinMode(12, OUTPUT);
 }
 
