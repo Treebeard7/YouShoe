@@ -1,3 +1,5 @@
+//THIS CODE IS OUTDATED, SEE YOUSHOE.INO FOR MOST RECENT CODE
+
 #include <SoftwareSerial.h>
 
 #include <TinyGPS++.h>
