@@ -249,6 +249,18 @@ void loop()
      exercise();
   
      }
+    
+    if (str. equalsIgnoreCase("productinfo")) 
+     {
+      Serial1.println("Welcome to Rohan's GPS Shoe");
+      Serial1.println(gps.date.value());
+      Serial1.println("Listed below are the commands and functions of this product");
+      Serial1.println("gps data --> prints lat/lng, speed, and time");
+      Serial1.println("pedometer --> step count");
+      Serial1.println("workout --> a workout setting for self-training");
+      Serial1.println("navigation --> navigate to a desired location. Remember to know lat/lng of desired destination!");
+      Serial1.println("resets --> resets desired speed, duration, and step count"); 
+     }
     }
 
        Serial1.flush();
